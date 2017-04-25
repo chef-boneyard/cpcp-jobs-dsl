@@ -6,7 +6,6 @@ freeStyleJob(name) {
     scm {
         git {
             remote {
-                name('origin')
                 url(repourl)
             }
             clean()
