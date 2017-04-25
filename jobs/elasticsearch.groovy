@@ -8,7 +8,7 @@ freeStyleJob(name) {
             remote {
                 url(repourl)
             }
-            clean()
+            clean(true)
             branch('master')
         }
     }
