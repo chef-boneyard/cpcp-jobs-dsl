@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "2.3.1" > .ruby-version
+echo "2.3.4" > .ruby-version
 echo "use_ruby" > .envrc
 direnv allow .
 eval "$(direnv export bash)"
