@@ -23,11 +23,13 @@ freeStyleJob(name) {
         shell sprintf('#!/bin/bash\ncat << EOF > .kitchen.azure.yml\n%s\nEOF', kitchenFile)
         shell '''
             #!/bin/bash
-            KITCHEN_YAML=".kitchen.azure.yml" chef exec kitchen test -c
+            eval "$(direnv export bash)"
+            KITCHEN_YAML=".kitchen.azure.yml" bundle exec kitchen test -c
         '''.stripIndent().trim()
         shell '''
             #!/bin/bash
-            KITCHEN_YAML=".kitchen.azure.yml" chef exec kitchen destroy all
+            eval "$(direnv export bash)"
+            KITCHEN_YAML=".kitchen.azure.yml" bundle exec kitchen destroy all
         '''.stripIndent().trim()        
     }
 
