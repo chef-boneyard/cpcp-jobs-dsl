@@ -24,13 +24,13 @@ freeStyleJob(name) {
         shell '''
             #!/bin/bash
             eval "$(direnv export bash)"
-            bundle exec gem install kitchen-azurerm -N
-            KITCHEN_YAML=".kitchen.azure.yml" bundle exec kitchen test -c
+            chef exec gem install kitchen-azurerm -N
+            KITCHEN_YAML=".kitchen.azure.yml" chef exec kitchen test -c
         '''.stripIndent().trim()
         shell '''
             #!/bin/bash
             eval "$(direnv export bash)"
-            KITCHEN_YAML=".kitchen.azure.yml" bundle exec kitchen destroy all
+            KITCHEN_YAML=".kitchen.azure.yml" chef exec kitchen destroy all
         '''.stripIndent().trim()        
     }
 
