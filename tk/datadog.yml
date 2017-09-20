@@ -1,0 +1,40 @@
+---
+driver:
+  name: azurerm
+
+driver_config:
+  subscription_id: '1e0b427a-d58b-494e-ae4f-ee558463ebbf'
+  location: 'East US'
+  machine_size: 'Standard_D1'
+
+transport:
+  ssh_key: ~/.ssh/id_kitchen-azurerm
+
+platforms:
+  - name: ubuntu-14.04
+
+provisioner:
+  name: chef_zero
+
+suites:
+# - name: default
+#   run_list: ["recipe[datadog::default]"]
+#   attributes: {}
+#   # This should actually do nothing.
+#   # There is a sanity.bats test to simply verify that /tmp exists.
+
+- name: dd-agent
+  run_list:
+    - recipe[datadog::dd-agent]
+  attributes:
+    datadog: &DATADOG
+      api_key: somethingnotnil
+      application_key: alsonotnil
+
+- name: dd-handler
+  run_list:
+    - recipe[datadog::dd-handler]
+  attributes:
+    datadog: &DATADOG
+      api_key: somethingnotnil
+      application_key: alsonotnil
