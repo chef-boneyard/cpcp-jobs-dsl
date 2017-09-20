@@ -39,7 +39,7 @@ freeStyleJob(name) {
 
     publishers {
         postBuildTask {
-            task('Class: Kitchen::ActionFailed', readFileFromWorkspace('resources/chef_exec_kitchen_destroy.sh')
+            task('Class: Kitchen::ActionFailed', readFileFromWorkspace('resources/chef_exec_kitchen_destroy.sh'))
         }
     }
 
