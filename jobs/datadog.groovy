@@ -36,4 +36,11 @@ freeStyleJob(name) {
     triggers {
         cron('@midnight')
     }
+
+    publishers {
+        postBuildTask {
+            task('Class: Kitchen::ActionFailed', readFileFromWorkspace('resources/chef_exec_kitchen_destroy.sh')
+        }
+    }
+
 }
