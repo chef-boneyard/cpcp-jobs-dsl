@@ -21,17 +21,7 @@ freeStyleJob(name) {
         shell readFileFromWorkspace('resources/bundle_exec_rake_style.sh')
         shell readFileFromWorkspace('resources/bundle_exec_rake_spec.sh')
         shell sprintf('#!/bin/bash\ncat << EOF > .kitchen.azure.yml\n%s\nEOF', kitchenFile)
-        shell '''
-            #!/bin/bash
-            eval "$(direnv export bash)"
-            chef exec gem install kitchen-azurerm -N
-            KITCHEN_YAML=".kitchen.azure.yml" chef exec kitchen test -c
-        '''.stripIndent().trim()
-        shell '''
-            #!/bin/bash
-            eval "$(direnv export bash)"
-            KITCHEN_YAML=".kitchen.azure.yml" chef exec kitchen destroy all
-        '''.stripIndent().trim()        
+        shell readFileFromWorkspace('resources/chef_exec_kitchen_test.sh')
     }
 
     wrappers {
@@ -49,11 +39,6 @@ freeStyleJob(name) {
     }
     
     publishers {
-        postBuildTask {
-            task('Class: Kitchen::ActionFailed', '''
-            #!/bin/bash
-            KITCHEN_YAML=".kitchen.azure.yml" chef exec kitchen destroy all
-            '''.stripIndent().trim())
-        }
+        task('Class: Kitchen::ActionFailed', readFileFromWorkspace('resources/chef_exec_kitchen_destroy.sh'))
     }
 }
