@@ -25,7 +25,7 @@ freeStyleJob(name) {
         shell readFileFromWorkspace('resources/chef_exec_foodcritic.sh')
         shell readFileFromWorkspace('resources/chef_exec_rspec_spec.sh')
         shell sprintf('#!/bin/bash\ncat << EOF > .kitchen.azure.yml\n%s\nEOF', kitchenFile)
-        sheel readFileFromWorkspace('resources/chef_exec_kitchen_test.sh')
+        shell readFileFromWorkspace('resources/chef_exec_kitchen_test.sh')
     }
 
     wrappers {
