@@ -14,7 +14,7 @@ freeStyleJob(name) {
             branch('master')
         }
     }
-chef
+
     steps {
         shell readFileFromWorkspace('resources/check_for_md_files.sh')
         shell readFileFromWorkspace('resources/chef_exec_rubocop.sh')
