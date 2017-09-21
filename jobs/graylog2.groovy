@@ -1,8 +1,8 @@
 // Specify basic variables to be used in the DSL
-String name = 'datadog-cookbook'
-String repourl = 'https://github.com/DataDog/chef-datadog.git'
+String name = 'graylog2-cookbook'
+String repourl = 'https://github.com/Graylog2/graylog2-cookbook.git'
 
-def kitchenFile = readFileFromWorkspace('tk/datadog.yml')
+def kitchenFile = readFileFromWorkspace('tk/graylog2.yml')
 
 freeStyleJob(name) {
 
@@ -17,13 +17,7 @@ freeStyleJob(name) {
 
     steps {
         shell readFileFromWorkspace('resources/check_for_md_files.sh')
-        shell '''
-        chef gem install coveralls
-        chef gem install json_spec
-        '''.stripIndent().trim()
-        shell readFileFromWorkspace('resources/chef_exec_rubocop.sh')
-        shell readFileFromWorkspace('resources/chef_exec_foodcritic.sh')
-        shell readFileFromWorkspace('resources/chef_exec_rspec_spec.sh')
+        shell readFileFromWorkspace('resources/chef_exec_rake_spec.sh')
         shell sprintf('#!/bin/bash\ncat << EOF > .kitchen.azure.yml\n%s\nEOF', kitchenFile)
         shell readFileFromWorkspace('resources/chef_exec_kitchen_test.sh')
     }
@@ -31,6 +25,11 @@ freeStyleJob(name) {
     wrappers {
         colorizeOutput()
         preBuildCleanup()
+        credentialsBinding {
+            string("AZURE_CLIENT_ID", "AZURE_CLIENT_ID")
+            string("AZURE_CLIENT_SECRET", "AZURE_CLIENT_SECRET")
+            string("AZURE_TENANT_ID", "AZURE_TENANT_ID")
+        }        
     }
 
     triggers {

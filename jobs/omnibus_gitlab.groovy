@@ -1,6 +1,6 @@
 // Specify basic variables to be used in the DSL
-String name = 'cdap-cookbook'
-String repourl = 'https://github.com/caskdata/cdap_cookbook.git'
+String name = 'omnibus_gitlab-cookbook'
+String repourl = 'https://gitlab.com/gitlab-org/cookbook-omnibus-gitlab.git'
 
 freeStyleJob(name) {
 
@@ -16,7 +16,7 @@ freeStyleJob(name) {
     steps {
         shell readFileFromWorkspace('resources/check_for_md_files.sh')
         shell readFileFromWorkspace('resources/envrc_setup.sh')
-        shell readFileFromWorkspace('resources/bundle_exec_rake.sh')
+        shell readFileFromWorkspace('resources/bundle_exec_rake_style')
     }
 
     wrappers {

@@ -1,0 +1,26 @@
+---
+driver:
+  name: azurerm
+
+driver_config:
+  subscription_id: '1e0b427a-d58b-494e-ae4f-ee558463ebbf'
+  location: 'East US'
+  machine_size: 'Standard_D1'
+
+transport:
+  ssh_key: ~/.ssh/id_kitchen-azurerm
+
+provisioner:
+  name: chef_zero
+
+platforms:
+  - name: ubuntu-14.04
+  - name: centos-5.11
+  - name: centos-6.7
+
+suites:
+  - name: default
+    run_list:
+      - recipe[sensu-test::ensure_group]
+      - recipe[sensu::default]
+    attributes:
