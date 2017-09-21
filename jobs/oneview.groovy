@@ -16,8 +16,8 @@ freeStyleJob(name) {
     steps {
         shell readFileFromWorkspace('resources/check_for_md_files.sh')
         shell readFileFromWorkspace('resources/envrc_setup.sh')
-        shell readFileFromWorkspace('resources/bundle_exec_rake_style')
-        shell readFileFromWorkspace('resources/bundle_exec_rake_unit')
+        shell readFileFromWorkspace('resources/bundle_exec_rake_style.sh')
+        shell readFileFromWorkspace('resources/bundle_exec_rake_unit.sh')
     }
 
     wrappers {
