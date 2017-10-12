@@ -16,7 +16,7 @@ freeStyleJob(name) {
     }
 
     steps {
-        envInjectBuilder {
+        environmentVariables {
             env('KITCHEN_YAML', '.kitchen.azure.yml')
         }
         shell readFileFromWorkspace('resources/check_for_md_files.sh')
