@@ -19,24 +19,29 @@ freeStyleJob(name) {
         shell readFileFromWorkspace('resources/check_for_md_files.sh')
         shell '''
             #!/bin/bash
+            echo "###### INSTALL GEMS ######"
             chef exec gem install dnsimple -N
             chef exec gem install kitchen-azurerm -N
         '''.stripIndent().trim()
         shell '''
             #!/bin/bash
+            echo "###### STYLE: RUBOCOP ######"
             chef exec rake style:rubocop
         '''.stripIndent().trim()
         shell '''
             #!/bin/bash
+            echo "###### STYLE: FOODCRTIC ######"
             chef exec rake style:foodcritic
         '''.stripIndent().trim()
         shell '''
             #!/bin/bash
+            echo "###### UNIT: CHEFSPEC ######"
             chef exec rake unit:chefspec
         '''.stripIndent().trim()
         shell sprintf('#!/bin/bash\ncat << EOF > .kitchen.azure.yml\n%s\nEOF', kitchenFile)
         shell '''
             #!/bin/bash
+            echo "###### INTEGRATION: TEST KITCHEN ######"
             KITCHEN_YAML=".kitchen.azure.yml" chef exec rake kitchen
         '''.stripIndent().trim()
     }
