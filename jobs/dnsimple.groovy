@@ -17,11 +17,27 @@ freeStyleJob(name) {
 
     steps {
         shell readFileFromWorkspace('resources/check_for_md_files.sh')
+        shell '''
+            #!/bin/bash
+            chef exec gem install dnsimple -N
+            chef exec gem install kitchen-azurerm -N
+        '''.stripIndent().trim()
+        shell '''
+            #!/bin/bash
+            chef exec rake style:rubocop
+        '''.stripIndent().trim()
+        shell '''
+            #!/bin/bash
+            chef exec rake style:foodcritic
+        '''.stripIndent().trim()
+        shell '''
+            #!/bin/bash
+            chef exec rake unit:chefspec
+        '''.stripIndent().trim()
         shell sprintf('#!/bin/bash\ncat << EOF > .kitchen.azure.yml\n%s\nEOF', kitchenFile)
         shell '''
             #!/bin/bash
-            chef exec gem install kitchen-azurerm -N
-            KITCHEN_YAML=".kitchen.azure.yml" chef exec rake all
+            KITCHEN_YAML=".kitchen.azure.yml" chef exec rake kitchen
         '''.stripIndent().trim()
     }
 
