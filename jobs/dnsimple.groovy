@@ -16,7 +16,11 @@ freeStyleJob(name) {
     }
 
     steps {
+        envInjectBuilder {
+            env('KITCHEN_YAML', '.kitchen.azure.yml')
+        }
         shell readFileFromWorkspace('resources/check_for_md_files.sh')
+        shell sprintf('#!/bin/bash\ncat << EOF > .kitchen.azure.yml\n%s\nEOF', kitchenFile)
         shell '''
             #!/bin/bash
             echo "###### INSTALL GEMS ######"
@@ -38,7 +42,6 @@ freeStyleJob(name) {
             echo "###### UNIT: CHEFSPEC ######"
             chef exec rake unit:chefspec
         '''.stripIndent().trim()
-        shell sprintf('#!/bin/bash\ncat << EOF > .kitchen.azure.yml\n%s\nEOF', kitchenFile)
         shell '''
             #!/bin/bash
             echo "###### INTEGRATION: TEST KITCHEN ######"
