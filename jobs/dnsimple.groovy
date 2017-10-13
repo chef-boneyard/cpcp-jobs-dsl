@@ -56,6 +56,7 @@ freeStyleJob(name) {
             string("AZURE_CLIENT_ID", "AZURE_CLIENT_ID")
             string("AZURE_CLIENT_SECRET", "AZURE_CLIENT_SECRET")
             string("AZURE_TENANT_ID", "AZURE_TENANT_ID")
+            string("DNSIMPLE_ACCESS_TOKEN", "DNSIMPLE_ACCESS_TOKEN")
         }
     }
 
