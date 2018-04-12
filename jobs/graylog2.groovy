@@ -6,6 +6,8 @@ def kitchenFile = readFileFromWorkspace('tk/graylog2.yml')
 
 freeStyleJob(name) {
 
+    label('chefdk')
+
     scm {
         git {
             remote {

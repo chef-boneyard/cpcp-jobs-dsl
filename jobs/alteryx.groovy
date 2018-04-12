@@ -4,6 +4,8 @@ String repourl = 'https://github.com/alteryx/cookbook-alteryx-server.git'
 
 freeStyleJob(name) {
 
+    label('chefdk')
+
     scm {
         git {
             remote {

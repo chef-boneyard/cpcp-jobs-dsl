@@ -4,6 +4,8 @@ String repourl = 'https://github.com/Dynatrace/Dynatrace-Chef.git'
 
 freeStyleJob(name) {
 
+    label('chefdk')
+
     scm {
         git {
             remote {

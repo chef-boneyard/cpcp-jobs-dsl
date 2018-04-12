@@ -6,6 +6,8 @@ def kitchenFile = readFileFromWorkspace('tk/3scale.yml')
 
 freeStyleJob(name) {
 
+    label('chefdk')
+
     scm {
         git {
             remote {

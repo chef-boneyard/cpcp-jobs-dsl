@@ -4,6 +4,8 @@ String repourl = 'https://github.com/Icinga/chef-icinga2.git'
 
 freeStyleJob(name) {
 
+    label('ruby')
+
     scm {
         git {
             remote {

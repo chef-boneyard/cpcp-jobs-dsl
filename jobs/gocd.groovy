@@ -4,6 +4,8 @@ String repourl = 'https://github.com/gocd/go-cookbook'
 
 freeStyleJob(name) {
 
+    label('ruby')
+
     scm {
         git {
             remote {

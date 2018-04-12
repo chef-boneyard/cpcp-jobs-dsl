@@ -4,6 +4,8 @@ String repourl = 'https://github.com/aristanetworks/chef-eos.git'
 
 freeStyleJob(name) {
 
+    label('chefdk')
+
     scm {
         git {
             remote {

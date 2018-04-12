@@ -4,6 +4,8 @@ String repourl = 'https://github.com/alertlogic/al_agents.git'
 
 freeStyleJob(name) {
 
+    label('chefdk')
+
     scm {
         git {
             remote {

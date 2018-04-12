@@ -4,6 +4,8 @@ String repourl = 'https://github.com/threatstack/threatstack-chef.git'
 
 freeStyleJob(name) {
 
+    label('ruby')
+
     scm {
         git {
             remote {

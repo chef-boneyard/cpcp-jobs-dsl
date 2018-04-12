@@ -6,6 +6,8 @@ def kitchenFile = readFileFromWorkspace('tk/sumlogic_collector.yml')
 
 freeStyleJob(name) {
 
+        label('chefdk')
+
     scm {
         git {
             remote {

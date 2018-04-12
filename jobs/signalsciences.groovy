@@ -4,6 +4,8 @@ String repourl = 'https://github.com/signalsciences/signalsciences-cookbook.git'
 
 freeStyleJob(name) {
 
+    label('ruby')
+
     scm {
         git {
             remote {

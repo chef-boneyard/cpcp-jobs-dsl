@@ -6,6 +6,8 @@ def kitchenFile = readFileFromWorkspace('tk/sensu.yml')
 
 freeStyleJob(name) {
 
+    label('ruby')
+
     scm {
         git {
             remote {

@@ -4,6 +4,8 @@ String repourl = 'https://github.com/cloudpassage/cloudpassage-chef-cookbook.git
 
 freeStyleJob(name) {
 
+    label('chefdk')
+
     scm {
         git {
             remote {

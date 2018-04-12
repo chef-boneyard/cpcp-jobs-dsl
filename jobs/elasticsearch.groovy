@@ -6,6 +6,8 @@ def kitchenFile = readFileFromWorkspace('tk/elasticsearch.yml')
 
 freeStyleJob(name) {
 
+    label('ruby')
+
     scm {
         git {
             remote {
