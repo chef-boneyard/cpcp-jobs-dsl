@@ -23,7 +23,7 @@ freeStyleJob(name) {
         shell readFileFromWorkspace('resources/bundle_exec_rake_style.sh')
         shell readFileFromWorkspace('resources/bundle_exec_rake_spec.sh')
         shell sprintf('#!/bin/bash\ncat << EOF > .kitchen.azure.yml\n%s\nEOF', kitchenFile)
-        shell readFileFromWorkspace('resources/chef_exec_kitchen_test.sh')
+        shell readFileFromWorkspace('resources/bundle_exec_kitchen_test.sh')
     }
 
     wrappers {
@@ -42,7 +42,7 @@ freeStyleJob(name) {
     
     publishers {
         postBuildTask {
-            task('Class: Kitchen::ActionFailed', readFileFromWorkspace('resources/chef_exec_kitchen_destroy.sh'))
+            task('Class: Kitchen::ActionFailed', readFileFromWorkspace('resources/bundle_exec_kitchen_destroy.sh'))
         }
     }
 }
