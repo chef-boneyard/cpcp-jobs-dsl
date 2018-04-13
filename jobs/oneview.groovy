@@ -4,7 +4,7 @@ String repourl = 'https://gitlab.com/gitlab-org/cookbook-omnibus-gitlab.git'
 
 freeStyleJob(name) {
 
-    label('rubvy')
+    label('ruby')
 
     scm {
         git {
