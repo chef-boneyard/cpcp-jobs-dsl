@@ -25,6 +25,9 @@ freeStyleJob(name) {
             buildStep {
                 shell readFileFromWorkspace('resources/check_for_md_files.sh')
             }
+            runner {
+                fail()
+            }
         }
 
         shell readFileFromWorkspace('resources/envrc_setup.sh')
