@@ -1,3 +1,3 @@
 #!/bin/bash
 eval "$(direnv export bash)"
-bundle exec rake spec
+bundle exec rake spec .
