@@ -28,11 +28,56 @@ freeStyleJob(name) {
             runner ('Fail')
         }
 
-        shell readFileFromWorkspace('resources/envrc_setup.sh')
-        shell readFileFromWorkspace('resources/bundle_exec_rake_style.sh')
-        shell readFileFromWorkspace('resources/bundle_exec_rake_spec.sh')
-        shell sprintf('#!/bin/bash\ncat << EOF > .kitchen.azure.yml\n%s\nEOF', kitchenFile)
-        shell readFileFromWorkspace('resources/bundle_exec_kitchen_test.sh')
+        conditionalSteps {
+            condition {
+                alwaysRun()
+            }
+            steps {
+                shell readFileFromWorkspace('resources/envrc_setup.sh')
+            }
+            runner ('Fail')
+        }
+
+        conditionalSteps {
+            condition {
+                alwaysRun()
+            }
+            steps {
+                shell readFileFromWorkspace('resources/bundle_exec_rake_style.sh')
+            }
+            runner ('Fail')
+        }
+
+        conditionalSteps {
+            condition {
+                alwaysRun()
+            }
+            steps {
+                shell readFileFromWorkspace('resources/bundle_exec_rake_spec.sh')
+            }
+            runner ('Fail')
+        }        
+        
+        conditionalSteps {
+            condition {
+                alwaysRun()
+            }
+            steps {
+                shell sprintf('#!/bin/bash\ncat << EOF > .kitchen.azure.yml\n%s\nEOF', kitchenFile)
+            }
+            runner ('Fail')
+        } 
+
+        conditionalSteps {
+            condition {
+                alwaysRun()
+            }
+            steps {
+                shell readFileFromWorkspace('resources/bundle_exec_kitchen_test.sh')
+            }
+            runner ('Fail')
+        }         
+        
     }
 
     wrappers {
