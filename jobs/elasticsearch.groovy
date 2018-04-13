@@ -68,7 +68,7 @@ freeStyleJob(name) {
                 #!/bin/bash
                 eval "$(direnv export bash)"
                 bundle exec gem install kitchen-azurerm -N 
-                '''.stripIndent.trim()
+                '''.stripIndent().trim()
             }
             runner ('Fail')
         }
