@@ -4,7 +4,7 @@ String repourl = 'https://github.com/Icinga/chef-icinga2.git'
 
 freeStyleJob(name) {
 
-    label('ruby')
+    label('chefdk')
 
     scm {
         git {
@@ -17,10 +17,9 @@ freeStyleJob(name) {
 
     steps {
         shell readFileFromWorkspace('resources/check_for_md_files.sh')
-        shell readFileFromWorkspace('resources/envrc_setup.sh')
-        shell readFileFromWorkspace('resources/bundle_exec_rake_rubocop.sh')
-        shell readFileFromWorkspace('resources/bundle_exec_rake_foodcritic.sh')
-        shell readFileFromWorkspace('resources/bundle_exec_rake_spec.sh')
+        shell readFileFromWorkspace('resources/chef_exec_rake_rubocop.sh')
+        shell readFileFromWorkspace('resources/chef_exec_rake_foodcritic.sh')
+        shell readFileFromWorkspace('resources/chef_exec_rake_spec.sh')
     }
 
     wrappers {
