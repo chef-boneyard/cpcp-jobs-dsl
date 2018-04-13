@@ -23,9 +23,3 @@ ruby --version
 gem install bundler -N
 gem install rake -N
 gem install github_api -N
-
-# Call bundle, but only if the a Gemfile exists
-if [ -f Gemfile ]
-then
-    bundle
-fi

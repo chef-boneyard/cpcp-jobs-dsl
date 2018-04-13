@@ -44,11 +44,29 @@ freeStyleJob(name) {
             }
             steps {
                 shell '''
-                bundle install -without kitchen_vagrant kitchen_rackspace kitchen_ec2 development
+                #!/bin/bash
+                eval "$(direnv export bash)"
+                bundle install --without kitchen_vagrant kitchen_rackspace kitchen_ec2 development
                 '''.stripIndent().trim()
             }
             runner ('Fail')
         }
+
+        // Write out the kitchen file for azure so that an environment variable can be set for
+        // its location. This will then be used by subsequent build steps
+        conditionalSteps {
+            condition {
+                alwaysRun()
+            }
+            steps {
+                shell sprintf('#!/bin/bash\ncat << EOF > .kitchen.azure.yml\n%s\nEOF', kitchenFile)
+            }
+            runner ('Fail')
+        }
+
+        environmentVariables {
+            env('KITCHEN_YAML', '.kitchen.azure.yml')
+        }        
 
         conditionalSteps {
             condition {
@@ -69,16 +87,6 @@ freeStyleJob(name) {
             }
             runner ('Fail')
         }        
-        
-        conditionalSteps {
-            condition {
-                alwaysRun()
-            }
-            steps {
-                shell sprintf('#!/bin/bash\ncat << EOF > .kitchen.azure.yml\n%s\nEOF', kitchenFile)
-            }
-            runner ('Fail')
-        } 
 
         conditionalSteps {
             condition {
@@ -111,4 +119,6 @@ freeStyleJob(name) {
             task('Class: Kitchen::ActionFailed', readFileFromWorkspace('resources/bundle_exec_kitchen_destroy.sh'))
         }
     }
+
+
 }
