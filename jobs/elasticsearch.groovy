@@ -60,10 +60,21 @@ freeStyleJob(name) {
             }
             steps {
                 shell sprintf('#!/bin/bash\ncat << EOF > .kitchen.azure.yml\n%s\nEOF', kitchenFile)
+
+                // In the case of this cookbook the AzureRM driver for TK needs to be installed
+                // before it is executed. This is because the rake tasks that are called will
+                // check that this is installed (because of the specified kitchen file)
+                shell '''
+                #!/bin/bash
+                eval "$(direnv export bash)"
+                bundle exec gem install kitchen-azurerm -N 
+                '''.stripIndent.trim()
             }
             runner ('Fail')
         }
 
+        // Set the environment variable for Test kitchen
+        // this will be used by subsequent build steps
         environmentVariables {
             env('KITCHEN_YAML', '.kitchen.azure.yml')
         }        
