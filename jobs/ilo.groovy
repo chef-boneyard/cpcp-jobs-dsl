@@ -1,6 +1,6 @@
 // Specify basic variables to be used in the DSL
 String name = 'ilo-cookbook'
-String repourl = 'https://github.com/Icinga/chef-icinga2.git'
+String repourl = 'https://github.com/HewlettPackard/ilo-chef.git'
 
 freeStyleJob(name) {
 
