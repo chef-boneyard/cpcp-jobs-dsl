@@ -43,6 +43,18 @@ freeStyleJob(name) {
                 alwaysRun()
             }
             steps {
+                shell '''
+                bundle install -without kitchen_vagrant kitchen_rackspace kitchen_ec2 development
+                '''.stripIndent().trim()
+            }
+            runner ('Fail')
+        }
+
+        conditionalSteps {
+            condition {
+                alwaysRun()
+            }
+            steps {
                 shell readFileFromWorkspace('resources/bundle_exec_rake_style.sh')
             }
             runner ('Fail')

@@ -17,7 +17,6 @@ freeStyleJob(name) {
 
     steps {
         shell readFileFromWorkspace('resources/check_for_md_files.sh')
-        shell readFileFromWorkspace('resources/envrc_setup.sh')
         shell readFileFromWorkspace('resources/chef_exec_rake_style.sh')
         shell readFileFromWorkspace('resources/chef_exec_rake_spec.sh')
     }

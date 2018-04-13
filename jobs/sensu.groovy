@@ -20,6 +20,7 @@ freeStyleJob(name) {
     steps {
         shell readFileFromWorkspace('resources/check_for_md_files.sh')
         shell readFileFromWorkspace('resources/envrc_setup.sh')
+        shell readFileFromWorkspace('resources/bundle_install.sh')
         shell readFileFromWorkspace('resources/bundle_exec_rspec.sh')
         shell sprintf('#!/bin/bash\ncat << EOF > .kitchen.azure.yml\n%s\nEOF', kitchenFile)
         shell readFileFromWorkspace('resources/bundle_exec_kitchen_test.sh')
