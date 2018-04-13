@@ -18,11 +18,11 @@ freeStyleJob(name) {
     }
 
     steps {
-        singleConditionalBuilder {
+        conditionalSteps {
             condition {
                 alwaysRun()
             }
-            buildStep {
+            steps {
                 shell readFileFromWorkspace('resources/check_for_md_files.sh')
             }
             runner {
