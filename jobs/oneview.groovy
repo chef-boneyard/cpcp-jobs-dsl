@@ -1,6 +1,6 @@
 // Specify basic variables to be used in the DSL
 String name = 'oneview-cookbook'
-String repourl = 'https://gitlab.com/gitlab-org/cookbook-omnibus-gitlab.git'
+String repourl = 'https://github.com/HewlettPackard/oneview-chef.git'
 
 freeStyleJob(name) {
 
