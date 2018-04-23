@@ -17,8 +17,14 @@ freeStyleJob(name) {
 
     steps {
         shell readFileFromWorkspace('resources/check_for_md_files.sh')
-        shell readFileFromWorkspace('resources/chef_exec_rake_style.sh')
-        shell readFileFromWorkspace('resources/chef_exec_rake_spec.sh')
+        shell '''
+            #!/bin/bash
+            chef exec foodcritic .
+        '''.stripIndent().trim()
+        shell '''
+            #!/bin/bash
+            chef exec rspec spec/
+        '''.stripIndent().trim()
     }
 
     wrappers {
